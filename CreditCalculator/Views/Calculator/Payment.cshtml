@@ -1,11 +1,18 @@
 ﻿@using System.Globalization
 @model IEnumerable<Payment>
-
+@{
+	var cultureInfo = CultureInfo.CreateSpecificCulture("ru-RU");
+}
 <table class="table">
-	<tr><th>Номер платежа</th><th>Дата платежа</th><th>Размер платежа по телу</th><th>Размер платежа по %</th><th>Остаток основного долга</th></tr>
+	<tr>
+		<th>Номер платежа</th>
+		<th>Дата платежа</th>	
+		<th>Размер платежа по телу</th>
+		<th>Размер платежа по %</th>
+		<th>Остаток основного долга</th>
+	</tr>
 	@foreach (var item in Model)
 	{
-		var cultureInfo = CultureInfo.CreateSpecificCulture("ru-RU");
 		<tr>
 			<td>@item.Id</td>
 			<td>@item.DateTime.ToString("dd MMMM yyyy", cultureInfo)</td>
@@ -16,4 +23,6 @@
 	}
 
 </table>
+<br />
+<div><b>Сумма переплат: </b> @Model.Sum(s=>s.PaymentPercentage).ToString("C", cultureInfo)</div>
 

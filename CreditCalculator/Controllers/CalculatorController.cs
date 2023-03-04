@@ -1,4 +1,5 @@
 ﻿using CreditCalculator.Models;
+using CreditCalculator.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CreditCalculator.Controllers
@@ -16,7 +17,7 @@ namespace CreditCalculator.Controllers
         {
             if (ModelState.IsValid) // проверка на стороне сервера 
             {
-                var res = LoanCalculater.Calculate(creditTerms);
+                var res = LoanCalculator.Calculate(creditTerms);
 
                 return View("Payment", res);
             }

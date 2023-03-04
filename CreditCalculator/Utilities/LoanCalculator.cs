@@ -1,7 +1,9 @@
 ﻿using DecimalMath;
-namespace CreditCalculator.Models
+using CreditCalculator.Models;
+
+namespace CreditCalculator.Utilities
 {
-    public static class LoanCalculater
+    public static class LoanCalculator
     {
         public static List<Payment> Calculate(CreditTerms creditTerms)
         {
