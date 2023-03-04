@@ -1,0 +1,59 @@
+﻿@model CreditTerms
+
+<script>
+	function OnChange(e) {
+		switch (e) {
+		  case '0':
+			$("#step").hide();
+			$("#step input[type='number']").val(1);
+			$("#term label").text('Срок займа (в месяцах):');
+			$("#rate label").text('Ставка в год:');
+			break;
+		  case '1':
+			$("#step").show();
+			$("#term label").text('Срок займа (в днях):');
+			$("#rate label").text('Ставка в день:');
+			break;
+		}
+	}
+</script>
+
+<form method="post">
+	<p>Выберите пожалуйста расчет платежа: </p>
+	<div class="form-check">
+		<input class="form-check-input" type="radio" name="CalculateType" id="flexRadioDefault1" value="0" onclick="OnChange(value);" checked>
+		<label class="form-check-label" for="flexRadioDefault1">
+			По месяцам
+		</label>
+	</div>
+	<div class="form-check">
+		<input class="form-check-input" type="radio" name="CalculateType" id="flexRadioDefault2" value="1" onclick="OnChange(value);">
+		<label class="form-check-label" for="flexRadioDefault2">
+			По дням
+		</label>
+	</div>
+	<div>
+		<label asp-for="Sum">Сумма займа в рублях:</label><br />
+		<input type="number" asp-for="Sum" min="1" />
+		<span asp-validation-for="Sum" />
+	</div>
+	<div id="term">
+		<label asp-for="Term">Срок займа (в месяцах):</label><br />
+		<input type="number" asp-for="Term" min="1" />
+		<span asp-validation-for="Term" />
+	</div>
+	<div id="rate">
+		<label asp-for="Rate">Ставка в год:</label><br />
+		<input type="number" asp-for="Rate" min="0" />
+		<span asp-validation-for="Rate" />
+	</div>
+	<div id="step" style="display: none">
+		<label asp-for="Step">Шаг платежа" (в днях):</label><br />
+		<input type="number" asp-for="Step" value="1" />
+		<span asp-validation-for="Step" />
+	</div>
+	<br />
+	<div>
+		<input type="submit" value="Расчитать" />
+	</div>
+</form>
